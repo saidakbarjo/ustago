@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 33% 99%;
+    --foreground: 226 48% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 226 48% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 48% 8%;
+    --primary: 232 100% 61%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 40% 96%;
+    --secondary-foreground: 226 48% 12%;
+    --muted: 222 30% 96%;
+    --muted-foreground: 224 12% 44%;
+    --accent: 228 100% 97%;
+    --accent-foreground: 232 90% 50%;
+    --destructive: 0 78% 56%;
+    --success: 152 64% 38%;
+    --success-soft: 150 70% 95%;
+    --warning: 38 95% 50%;
+    --warning-soft: 45 100% 94%;
+    --border: 224 24% 91%;
+    --input: 224 24% 89%;
+    --ring: 232 100% 61%;
+    --radius: 1.25rem;
+  }
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  html, body { overflow-x: clip; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  ::selection { background: rgba(58, 85, 255, 0.18); }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/60;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 12px 32px -12px rgba(16, 24, 40, .18);
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(100deg, #2a3bf5 0%, #5b7cff 45%, #8b5cf6 100%);
+  }
+  .section { @apply py-20 md:py-28; }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-600 shadow-soft;
+  }
+  .card-lift { @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift; }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(15, 23, 42, .045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15, 23, 42, .045) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .skeleton { @apply relative overflow-hidden rounded-xl bg-muted; }
+  .skeleton::after {
+    content: ""; @apply absolute inset-0 -translate-x-full animate-shimmer;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .7), transparent);
+  }
+}
+
+/* Leaflet price markers */
+.leaflet-container { font-family: inherit; background: #eef1f7; }
+.price-marker {
+  background: #fff; color: #0b1020; font-weight: 700; font-size: 12px;
+  padding: 6px 10px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 6px 18px -6px rgba(16, 24, 40, .35), 0 0 0 1px rgba(16, 24, 40, .06);
+  transform: translate(-50%, -50%); transition: all .2s ease; display: inline-flex; gap: 6px; align-items: center;
+}
+.price-marker .dot { width: 6px; height: 6px; border-radius: 99px; background: #16a34a; }
+.price-marker.active, .price-marker:hover { background: #2a3bf5; color: #fff; transform: translate(-50%, -50%) scale(1.12); z-index: 999; }
+.leaflet-div-icon { background: transparent !important; border: 0 !important; }
+.leaflet-popup-content-wrapper { border-radius: 18px !important; box-shadow: 0 20px 40px -12px rgba(16, 24, 40, .3) !important; }
+.leaflet-popup-content { margin: 12px 14px !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
